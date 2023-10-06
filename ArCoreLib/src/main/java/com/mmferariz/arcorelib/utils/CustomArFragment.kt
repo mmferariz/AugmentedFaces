@@ -1,4 +1,4 @@
-package com.example.arsnapchat
+package com.mmferariz.arcorelib.utils
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.google.ar.core.Session
 import com.google.ar.sceneform.ux.ArFragment
 import java.util.*
 
-class CustomArFragment : ArFragment() {
+open class CustomArFragment : ArFragment() {
     override fun getSessionConfiguration(session: Session): Config {
         val config = Config(session)
         config.augmentedFaceMode = Config.AugmentedFaceMode.MESH3D

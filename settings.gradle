@@ -1,2 +1,3 @@
 rootProject.name='ARSnapchat'
 include ':app'
+include ':ArCoreLib'
