@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
+import android.widget.LinearLayout
 import com.google.ar.core.Config
 import com.google.ar.core.Session
 import com.google.ar.sceneform.ux.ArFragment
@@ -28,7 +28,7 @@ open class CustomArFragment : ArFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val frameLayout = super.onCreateView(inflater, container, savedInstanceState) as FrameLayout
+        val frameLayout = super.onCreateView(inflater, container, savedInstanceState) as LinearLayout
         planeDiscoveryController.hide()
         planeDiscoveryController.setInstructionView(null)
         return frameLayout
