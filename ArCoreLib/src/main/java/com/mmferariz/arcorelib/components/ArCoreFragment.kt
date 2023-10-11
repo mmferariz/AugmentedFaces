@@ -25,9 +25,9 @@ class ArCoreFragment @JvmOverloads constructor(
     private val faceNodeMap = HashMap<AugmentedFace, AugmentedFaceNode>()
 
         init {
-            val config = Config(session)
-            config.augmentedFaceMode = Config.AugmentedFaceMode.MESH3D
-            setupSession(session)
+            // val config = Config(session)
+            // config.augmentedFaceMode = Config.AugmentedFaceMode.MESH3D
+            // setupSession(session)
 
             Texture.builder()
                 .setSource(context, R.drawable.fox_face_mesh_texture)
