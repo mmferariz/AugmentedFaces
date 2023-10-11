@@ -1,35 +1,33 @@
 package com.mmferariz.arcorelib.components
 
+import android.app.Activity
 import android.content.Context
 import android.util.AttributeSet
-import android.view.LayoutInflater
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentActivity
 import com.google.ar.core.AugmentedFace
+import com.google.ar.core.Config
 import com.google.ar.core.TrackingState
+import com.google.ar.sceneform.ArSceneView
 import com.google.ar.sceneform.rendering.Renderable
 import com.google.ar.sceneform.rendering.Texture
 import com.google.ar.sceneform.ux.AugmentedFaceNode
 import com.mmferariz.arcorelib.R
-import com.mmferariz.arcorelib.utils.CustomArFragment
 import java.util.HashMap
 
 class ArCoreFragment @JvmOverloads constructor(
     context: Context,
+    activity: Activity,
     attrs: AttributeSet? = null,
-    defStyle: Int = 0,
-    defStyleRes: Int = 0,
-    ) : LinearLayout(context, attrs, defStyle, defStyleRes) {
+    ) : ArSceneView(context, attrs) {
 
     private var texture: Texture? = null
     private var isAdded = false
     private val faceNodeMap = HashMap<AugmentedFace, AugmentedFaceNode>()
 
         init {
-            LayoutInflater.from(context).inflate(R.layout.component_ar_layout, this, true)
-            val customArFragment = (context as FragmentActivity).supportFragmentManager.findFragmentById(R.id.arFragment) as CustomArFragment?
+            val config = Config(session)
+            config.augmentedFaceMode = Config.AugmentedFaceMode.MESH3D
+            setupSession(session)
 
             Texture.builder()
                 .setSource(context, R.drawable.fox_face_mesh_texture)
@@ -40,18 +38,18 @@ class ArCoreFragment @JvmOverloads constructor(
                     null
                 }
 
-            customArFragment?.arSceneView?.setCameraStreamRenderPriority(Renderable.RENDER_PRIORITY_FIRST)
-            customArFragment?.arSceneView?.scene?.addOnUpdateListener {
+            cameraStreamRenderPriority = Renderable.RENDER_PRIORITY_FIRST
+            scene?.addOnUpdateListener {
                 if (texture == null) return@addOnUpdateListener
 
-                val frame = customArFragment.arSceneView.arFrame ?: return@addOnUpdateListener
+                val frame = arFrame ?: return@addOnUpdateListener
                 val augmentedFaces = frame.getUpdatedTrackables(AugmentedFace::class.java)
 
                 for (augmentedFace in augmentedFaces) {
                     if (isAdded) return@addOnUpdateListener
 
                     val augmentedFaceNode = AugmentedFaceNode(augmentedFace).apply {
-                        setParent(customArFragment.arSceneView.scene)
+                        setParent(scene)
                         setFaceMeshTexture(texture)
                     }
                     faceNodeMap[augmentedFace] = augmentedFaceNode
