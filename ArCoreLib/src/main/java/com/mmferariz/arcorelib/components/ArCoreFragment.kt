@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 import com.google.ar.core.AugmentedFace
 import com.google.ar.core.TrackingState
 import com.google.ar.sceneform.rendering.Renderable
@@ -28,7 +29,7 @@ class ArCoreFragment @JvmOverloads constructor(
 
         init {
             LayoutInflater.from(context).inflate(R.layout.component_ar_layout, this, true)
-            val customArFragment = (context as AppCompatActivity).supportFragmentManager.findFragmentById(R.id.arFragment) as CustomArFragment?
+            val customArFragment = (context as FragmentActivity).supportFragmentManager.findFragmentById(R.id.arFragment) as CustomArFragment?
 
             Texture.builder()
                 .setSource(context, R.drawable.fox_face_mesh_texture)
