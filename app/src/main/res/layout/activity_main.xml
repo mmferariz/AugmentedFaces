@@ -4,10 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <com.mmferariz.arcorelib.components.ArCoreFragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    tools:context=".MainActivity"
+    android:id="@+id/layout"
+    android:orientation="vertical">
 
 </LinearLayout>
